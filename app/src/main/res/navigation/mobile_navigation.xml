@@ -22,4 +22,10 @@
         android:name="com.isabella.aprenderingles.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_sair"
+        android:name="com.isabella.aprenderingles.ui.sair.SairFragment"
+        android:label="@string/menu_sair"
+        tools:layout="@layout/fragment_sair" />
 </navigation>
