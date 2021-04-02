@@ -2,6 +2,7 @@ package com.isabella.aprenderingles.ui.gallery;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.isabella.aprenderingles.BuildConfig;
@@ -20,6 +22,11 @@ import com.isabella.aprenderingles.R;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -27,6 +34,7 @@ import java.util.Random;
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
+import jxl.WorkbookSettings;
 import jxl.read.biff.BiffException;
 
 
@@ -45,6 +53,7 @@ public class GalleryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_gallery, container, false);
         Button b = (Button) view.findViewById(R.id.idBtnConhecer);
         b.setOnClickListener(new View.OnClickListener(){
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
 
@@ -53,13 +62,19 @@ public class GalleryFragment extends Fragment {
                 AssetManager am = getContext().getAssets();
                 InputStream is = null;
                 try {
+
+
                     is = am.open("palavras.xls");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 Workbook wb = null;
+
                 try {
-                    wb = Workbook.getWorkbook(is);
+                    WorkbookSettings conf = new WorkbookSettings();
+                    conf.setEncoding("Cp1252"); //acentuacao
+                    wb = Workbook.getWorkbook(is, conf);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (BiffException e) {
@@ -114,7 +129,18 @@ public class GalleryFragment extends Fragment {
                 TextView pPortugues = view.findViewById(R.id.idTvPalavraEmPortugues);
                 pPortugues.setText(apalavraTraduzida.substring(0,1).toUpperCase() + apalavraTraduzida.substring(1).toLowerCase());
 
-               list.removeAll(list);
+
+
+             //   ByteBuffer byteBuffer = StandardCharsets.UTF_8.encode(apalavraTraduzida);
+              //  ByteBuffer byteBuffer = StandardCharsets.UTF_8.encode("áéíóúçãõ");
+               // String aaa = StandardCharsets.UTF_8.decode(byteBuffer).toString();
+
+               // Log.i("MyApp", aaa);
+                Log.i("MyApp", apalavraTraduzida);
+
+
+
+                list.removeAll(list);
 
                 ImageView iv = (ImageView) view.findViewById(R.id.idImImagem);
 
