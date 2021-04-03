@@ -1,6 +1,5 @@
-package com.isabella.aprenderingles.ui.gallery;
+package com.isabella.aprenderingles.ui.animais;
 
-import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,22 +10,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import com.isabella.aprenderingles.BuildConfig;
 import com.isabella.aprenderingles.R;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -38,9 +30,9 @@ import jxl.WorkbookSettings;
 import jxl.read.biff.BiffException;
 
 
-public class GalleryFragment extends Fragment {
+public class AnimaisFragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
+    private AnimaisViewModel galleryViewModel;
     List<String> list = new ArrayList<String>();
     String palavra = "";
     int posicaoColunaDaPalavra = 0;
@@ -50,7 +42,7 @@ public class GalleryFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_gallery, container, false);
+        View view = inflater.inflate(R.layout.fragment_animais, container, false);
         Button b = (Button) view.findViewById(R.id.idBtnConhecer);
         b.setOnClickListener(new View.OnClickListener(){
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -119,24 +111,24 @@ public class GalleryFragment extends Fragment {
                 Log.d("CREATION", "posicao" + posicaoColunaDaPalavra);
 
                 Cell trad = s.getCell(posicaoColunaDaPalavra , 1);
-                String apalavraTraduzida = trad.getContents();
+                String palavraTraduzida = trad.getContents();
 
-               //display(randomElement, apalavraTraduzida);
+               //display(randomElement, palavraTraduzida);
 
                 TextView pIngles = view.findViewById(R.id.idTvPalavraEmIngles);
-                pIngles.setText(randomElement.toUpperCase());
+                pIngles.setText(randomElement.toUpperCase().replaceAll("_", " "));
 
                 TextView pPortugues = view.findViewById(R.id.idTvPalavraEmPortugues);
-                pPortugues.setText(apalavraTraduzida.substring(0,1).toUpperCase() + apalavraTraduzida.substring(1).toLowerCase());
+                pPortugues.setText(palavraTraduzida.substring(0,1).toUpperCase() + palavraTraduzida.substring(1).toLowerCase());
 
 
 
-             //   ByteBuffer byteBuffer = StandardCharsets.UTF_8.encode(apalavraTraduzida);
+             //   ByteBuffer byteBuffer = StandardCharsets.UTF_8.encode(palavraTraduzida);
               //  ByteBuffer byteBuffer = StandardCharsets.UTF_8.encode("áéíóúçãõ");
                // String aaa = StandardCharsets.UTF_8.decode(byteBuffer).toString();
 
                // Log.i("MyApp", aaa);
-                Log.i("MyApp", apalavraTraduzida);
+                Log.i("MyApp", palavraTraduzida);
 
 
 

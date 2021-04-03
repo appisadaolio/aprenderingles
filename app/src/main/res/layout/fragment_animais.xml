@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.gallery.GalleryFragment">
+    tools:context=".ui.animais.AnimaisFragment">
 
     <TextView
         android:id="@+id/idTvPalavraEmIngles"
-        android:layout_width="183dp"
-        android:layout_height="48dp"
+        android:layout_width="311dp"
+        android:layout_height="118dp"
         android:fontFamily="sans-serif-black"
-        android:text="Animal"
+        android:gravity="bottom"
+        android:text="Cique no botão abaixo para aprender o nome dos Animais em Inglês"
         android:textAlignment="center"
         android:textSize="24sp"
         app:flow_horizontalAlign="center"
@@ -21,7 +22,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.07" />
+        app:layout_constraintVertical_bias="0.096" />
 
     <Button
         android:id="@+id/idBtnConhecer"
@@ -29,7 +30,7 @@
         android:layout_height="65dp"
         android:layout_marginTop="30dp"
         android:onClick="order"
-        android:text="Vamos conhecer os nomes dos animais em inglês?"
+        android:text="Vamos conhecer os nomes dos animais?"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idTvPalavraEmPortugues" />
@@ -43,16 +44,16 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idTvPalavraEmIngles"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        app:srcCompat="@drawable/animais_capa" />
 
     <TextView
         android:id="@+id/idTvPalavraEmPortugues"
-        android:layout_width="214dp"
-        android:layout_height="50dp"
+        android:layout_width="266dp"
+        android:layout_height="75dp"
         android:layout_marginTop="20dp"
-        android:text="Tradução"
+        android:text="A cada clique, irá trazer um animal diferente"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idImImagem" />

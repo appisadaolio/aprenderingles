@@ -1,14 +1,14 @@
-package com.isabella.aprenderingles.ui.gallery;
+package com.isabella.aprenderingles.ui.animais;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class AnimaisViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public AnimaisViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is gallery fragment");
     }
