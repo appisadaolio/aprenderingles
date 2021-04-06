@@ -42,7 +42,7 @@ public class AnimaisFragment extends Fragment {
     String randomElement = "";
     String elementoAnterior = "";
     private TextToSpeech mTTS;
-    private Button mButtonSpeak;
+    private ImageView microfone;
     private TextView pIngles;
     private Context context;
 
@@ -139,12 +139,14 @@ public class AnimaisFragment extends Fragment {
                 iv.setImageResource(getResources().getIdentifier(variableValue, "drawable", getContext().getPackageName()));
                 //Log.i("MyApp",abc.getText().toString());
 
+                microfone.setVisibility(view.VISIBLE);
 
             }
         });
 
 
-        mButtonSpeak = view.findViewById(R.id.falar);
+      //  mButtonSpeak = view.findViewById(R.id.falar);
+        microfone = view.findViewById(R.id.idIvMic);
         mTTS = new TextToSpeech(this.getContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -165,7 +167,7 @@ public class AnimaisFragment extends Fragment {
             }
         });
 
-        mButtonSpeak.setOnClickListener(new View.OnClickListener() {
+        microfone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

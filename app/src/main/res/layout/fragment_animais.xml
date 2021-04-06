@@ -57,12 +57,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idImImagem" />
 
-    <Button
-        android:id="@+id/falar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:text="Ouvir palavra em Ingles"
-        app:layout_constraintTop_toBottomOf="@+id/idBtnConhecer"
-        tools:layout_editor_absoluteX="86dp" />
+    <ImageView
+        android:id="@+id/idIvMic"
+        android:layout_width="56dp"
+        android:layout_height="51dp"
+        android:src="@drawable/ic_microfone"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/idImImagem"
+        app:layout_constraintStart_toEndOf="@+id/idImImagem"
+        app:layout_constraintTop_toTopOf="@+id/idImImagem"
+        app:layout_constraintVertical_bias="0.454" />
 </androidx.constraintlayout.widget.ConstraintLayout>
