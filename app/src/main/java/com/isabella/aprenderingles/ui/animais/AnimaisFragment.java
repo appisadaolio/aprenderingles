@@ -1,8 +1,10 @@
 package com.isabella.aprenderingles.ui.animais;
 
+import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import jxl.Cell;
@@ -38,7 +41,12 @@ public class AnimaisFragment extends Fragment {
     int posicaoColunaDaPalavra = 0;
     String randomElement = "";
     String elementoAnterior = "";
+    private TextToSpeech mTTS;
+    private Button mButtonSpeak;
+    private TextView pIngles;
+    private Context context;
 
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -49,7 +57,6 @@ public class AnimaisFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-               // TextView abc = (TextView) view.findViewById(R.id.idTvPalavraEmIngles);
                 //https://www.youtube.com/watch?v=9iTRAwCazw8&t=310s
                 AssetManager am = getContext().getAssets();
                 InputStream is = null;
@@ -115,22 +122,13 @@ public class AnimaisFragment extends Fragment {
 
                //display(randomElement, palavraTraduzida);
 
-                TextView pIngles = view.findViewById(R.id.idTvPalavraEmIngles);
+                pIngles = view.findViewById(R.id.idTvPalavraEmIngles);
                 pIngles.setText(randomElement.toUpperCase().replaceAll("_", " "));
 
                 TextView pPortugues = view.findViewById(R.id.idTvPalavraEmPortugues);
                 pPortugues.setText(palavraTraduzida.substring(0,1).toUpperCase() + palavraTraduzida.substring(1).toLowerCase());
 
-
-
-             //   ByteBuffer byteBuffer = StandardCharsets.UTF_8.encode(palavraTraduzida);
-              //  ByteBuffer byteBuffer = StandardCharsets.UTF_8.encode("áéíóúçãõ");
-               // String aaa = StandardCharsets.UTF_8.decode(byteBuffer).toString();
-
-               // Log.i("MyApp", aaa);
                 Log.i("MyApp", palavraTraduzida);
-
-
 
                 list.removeAll(list);
 
@@ -145,7 +143,54 @@ public class AnimaisFragment extends Fragment {
             }
         });
 
-        return view;
+
+        mButtonSpeak = view.findViewById(R.id.falar);
+        mTTS = new TextToSpeech(this.getContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status == TextToSpeech.SUCCESS){
+                   int result = mTTS.setLanguage(Locale.ENGLISH);
+
+                   if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED){
+                       Log.e("TTS", "Language not spported");
+                    }
+                   else{
+                      // mButtonSpeak.setEnabled(true);
+                   }
+
+                }
+                else{
+                    Log.e("TTS", "Initialization failed");
+                }
+            }
+        });
+
+        mButtonSpeak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                speak();
+            }
+        });
+
+
+
+       return view;
+    }
+
+
+    private void speak(){
+        String text = pIngles.getText().toString();
+        mTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+
+    }
+
+    public void onDestroy() {
+        if (mTTS != null){
+            mTTS.stop();
+            mTTS.shutdown();
+        }
+        super.onDestroy();
     }
 
 

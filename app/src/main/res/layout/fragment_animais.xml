@@ -29,7 +29,6 @@
         android:layout_width="343dp"
         android:layout_height="65dp"
         android:layout_marginTop="30dp"
-        android:onClick="order"
         android:text="Vamos conhecer os nomes dos animais?"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,4 +56,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idImImagem" />
+
+    <Button
+        android:id="@+id/falar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="Ouvir palavra em Ingles"
+        app:layout_constraintTop_toBottomOf="@+id/idBtnConhecer"
+        tools:layout_editor_absoluteX="86dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
